@@ -2,13 +2,22 @@
 
 fOut=chentz_plain.txt
 
-echo "Twitter: @chentz78" > $fOut
+echo "Gab.ai: @Chentz" > $fOut
+echo >> $fOut
+
+echo "Twitter: @chentz78" >> $fOut
+echo >> $fOut
+
+echo "Personal Page: https://chentz.keybase.pub" >> $fOut
 echo >> $fOut
 
 echo "Keybase.io: chentz" >> $fOut
 echo >> $fOut
 
 echo "e-mail: cleverton dot hentz at gmail dot com" >> $fOut
+echo >> $fOut
+
+echo "Public bitcoin: 1GULGZz1Q8yuLwmQmxGGtRCbADkaQv7pAb" >> $fOut
 echo >> $fOut
 
 echo "$ date" >> $fOut
