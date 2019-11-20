@@ -14,7 +14,8 @@ echo >> $fOut
 echo "Keybase.io: chentz" >> $fOut
 echo >> $fOut
 
-echo "e-mail: cleverton dot hentz at protonmail dot ch" >> $fOut
+echo "e-mail: cleverton at pm dot me" >> $fOut
+echo "      : cleverton dot hentz at protonmail dot ch" >> $fOut
 echo "      : cleverton dot hentz at gmail dot com" >> $fOut
 echo >> $fOut
 
