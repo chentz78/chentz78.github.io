@@ -5,8 +5,8 @@ fOut=chentz_plain.txt
 echo "Gab.ai: @Chentz" > $fOut
 echo >> $fOut
 
-echo "Twitter: @chentz78" >> $fOut
-echo >> $fOut
+#echo "Twitter: @chentz78" >> $fOut
+#echo >> $fOut
 
 echo "Personal Page: https://chentz.keybase.pub" >> $fOut
 echo >> $fOut
