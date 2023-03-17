@@ -8,7 +8,7 @@ echo >> $fOut
 #echo "Twitter: @chentz78" >> $fOut
 #echo >> $fOut
 
-echo "Personal Page: https://chentz.keybase.pub" >> $fOut
+echo "Personal Page: https://chentz78.github.io/" >> $fOut
 echo >> $fOut
 
 echo "Keybase.io: chentz" >> $fOut

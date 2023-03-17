@@ -3,7 +3,7 @@ Hash: SHA512
 
 Gab.ai: @Chentz
 
-Personal Page: https://chentz.keybase.pub
+Personal Page: https://chentz78.github.io/
 
 Keybase.io: chentz
 
@@ -14,7 +14,7 @@ e-mail: cleverton at pm dot me
 Public bitcoin: 1GULGZz1Q8yuLwmQmxGGtRCbADkaQv7pAb
 
 $ date
-Tue 18 May 2021 04:07:12 PM -03
+Fri Mar 17 12:21:39 PM -03 2023
 
 $ gpg --fingerprint 0x6EE40E7A050BA983
 pub   rsa4096/0x6EE40E7A050BA983 2019-05-09 [C] [expires: 2023-05-15]
@@ -126,15 +126,15 @@ D70/6KWEAEEIeHKmVLrsQV/dWa1VshFcxN2tXMCrEJTDs/Yjr3qVU8Pbgg==
 -----BEGIN PGP SIGNATURE-----
 Comment: GPGTools - http://gpgtools.org
 
-iQGzBAEBCgAdFiEE7MEJ7jhEBhkSK63DyQI0zXTEkxUFAmCkEGAACgkQyQI0zXTE
-kxXFFAv+JcbS+WNZyme5f1uizhc/oMhKjd902vw2hmzBoLvsmbetLHCzEzBuuv78
-088Wy6EjdD+NXwlIZqxvY9vap8OFaq9+/YAAZi83arYaYC1XaYFgRkoaChFlddvU
-29CekY7fz4/hGICqsPz5YeFHGtCixifc2+eDaOKk9cj23KIzQImhrFchZeoVRYRc
-aAxiWSgyWiPyZT0pu+7bR/OSjOfCihpM6MN47deyyEdjBdOMVkfQEgGkxUmLPjIe
-cKmcLsrkELqz4ve1vO+suTmrlpWHaAlUyoCcfAF5PsxJ60TMWsn8mRERtgnmvYBw
-m1Bi1lXixZqTeDCzpIC67439YqhYDWAU8Tpj191pb+LYJ7w5IE9Th1gNmEzUEk1d
-jiITC304HUO07UUSZ+9SMRE/roUEh7g/vT/+6lpx3Ma0UU7ORMnhul0LraB7U1AC
-McWPhZbgr2XSns5gRsV38TgpOZJJgM7qbVDCeXRM/4xPZF0FYoO023jmgjzaOJlk
-WAwda3FV
-=KSy0
+iQGzBAEBCgAdFiEE7MEJ7jhEBhkSK63DyQI0zXTEkxUFAmQUhYMACgkQyQI0zXTE
+kxXQWAv/UsLr5mFmW0wBNL1eBTOPSmep+DOTg/CL9Acsqexmvg4YnwjYZUT9J535
+CVapBeRaBabJ8mDpyGg6rrAOCRbkomYWuS5jbl0MzCh5yPn4IJUBAk8aeKX+p7n8
+zNrm9rErCtThrsRhNxy8cl56wPpzMT10Ou/+AsDAWP/sbThDPZyeqCRf/bIhk0Er
+uIWpeweQH2BG2IFDhEWx95IpiaA4EcTMXNanG8f7By0IbeHjLU1BZgk0o0r0wqBt
+vv4ZLvbu4IoZ8/hDh0VCcmv3E3/VXLyOE7At56S2I4Mu4qx3xlP64sOJngA9lTBc
+J829N9PucSofXXwdQFP6KlpbTNDwUTDCht+14u8KTqC+pmo2WxRnSylZByI67GgJ
+k8ai+iN5MMrqnfCE7CpkyJaHfnN1sob+Gn7tRA+sf/jQEzWzsyxiuJEk+H8bAEJt
+TosMz1NRXCUz35Y75eH7Nwsfk8Lj3PRaLL46koxT6diOi5g1B64DdRwkE0wFl5+D
+9KeDV9V+
+=Le4B
 -----END PGP SIGNATURE-----
