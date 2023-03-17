@@ -1,0 +1,831 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>LGen Documentation</title>
+    <link rel="stylesheet" href="../ldoc_fixed.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>LGen</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Events">Events</a></li>
+<li><a href="#Functions">Functions</a></li>
+<li><a href="#Local_Functions">Local Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/GenerationEngine.html">GenerationEngine</a></li>
+  <li><a href="../modules/GenerationEngine.GenerationRunner.html">GenerationEngine.GenerationRunner</a></li>
+  <li><strong>GenerationEngine.coverageCriteria</strong></li>
+  <li><a href="../modules/GenerationEngine.grammar_transformation.html">GenerationEngine.grammar_transformation</a></li>
+  <li><a href="../modules/GenerationEngine.productionCoverage.html">GenerationEngine.productionCoverage</a></li>
+  <li><a href="../modules/Translator.html">Translator</a></li>
+  <li><a href="../modules/Translator.ANTLR_G.html">Translator.ANTLR_G</a></li>
+  <li><a href="../modules/Translator.EBNF_G.html">Translator.EBNF_G</a></li>
+  <li><a href="../modules/Translator.SDF_G.html">Translator.SDF_G</a></li>
+  <li><a href="../modules/Translator.printDotGDGraph.html">Translator.printDotGDGraph</a></li>
+</ul>
+<h2>Scripts</h2>
+<ul class="nowrap">
+  <li><a href="../scripts/RunGrammar.html">RunGrammar</a></li>
+  <li><a href="../scripts/buildProdGraph.html">buildProdGraph</a></li>
+  <li><a href="../scripts/grammarTrans.html">grammarTrans</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>GenerationEngine.coverageCriteria</code></h1>
+<p>Framework to implement a coverage criteria.</p>
+<p>
+
+</p>
+    <h3>Info:</h3>
+    <ul>
+        <li><strong>Author</strong>: Cleverton Hentz</li>
+    </ul>
+
+
+<h2><a href="#Events">Events</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#initGrammar">initGrammar</a></td>
+	<td class="summary">Dispatched before the definition of the input grammar.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#finalizeGrammar">finalizeGrammar</a></td>
+	<td class="summary">Dispatched after the definition of the input grammar.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#initGen">initGen</a></td>
+	<td class="summary">Dispatched before the generation execution for the input grammar.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#finalizeGen">finalizeGen</a></td>
+	<td class="summary">Dispatched after the generation execution for the input grammar.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#onTerminal">onTerminal</a></td>
+	<td class="summary">On the terminal definition</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#onSeq">onSeq</a></td>
+	<td class="summary">On sequence definition.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#onAlt">onAlt</a></td>
+	<td class="summary">On alternative definition.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#onNonTerminal">onNonTerminal</a></td>
+	<td class="summary">On nonterminal definition.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#onProductionRule">onProductionRule</a></td>
+	<td class="summary">On production rule definition.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#onOptional">onOptional</a></td>
+	<td class="summary">On optional definition.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#onZeroOrMore">onZeroOrMore</a></td>
+	<td class="summary">On zeroOrMore definition.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#onOneOrMore">onOneOrMore</a></td>
+	<td class="summary">On oneOrMore definition.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#onOneOrMoreSep">onOneOrMoreSep</a></td>
+	<td class="summary">On oneOrMoreSep definition.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#onIdent">onIdent</a></td>
+	<td class="summary">On identify definition.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#checkSentence">checkSentence</a></td>
+	<td class="summary">Before add a sentence on the result set.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#checkTerminal">checkTerminal</a></td>
+	<td class="summary">Before execute the terminal operator.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#checkNonTerminal">checkNonTerminal</a></td>
+	<td class="summary">Before execute the nonterminal operator.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#checkSeq">checkSeq</a></td>
+	<td class="summary">Before execute the sequence operator.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#checkAlt">checkAlt</a></td>
+	<td class="summary">Before execute the alternative operator.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#checkZeroOrMore">checkZeroOrMore</a></td>
+	<td class="summary">Before execute the ZeroOrMore operator.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#checkOneOrMore">checkOneOrMore</a></td>
+	<td class="summary">Before execute the OneOrMore operator.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#checkOneOrMoreSep">checkOneOrMoreSep</a></td>
+	<td class="summary">Before execute the OneOrMoreSep operator.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#checkIdent">checkIdent</a></td>
+	<td class="summary">Before execute the OneOrMoreSep operator.</td>
+	</tr>
+</table>
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#CoverageCriteria.setCoverageCriteria">setCoverageCriteria</a></td>
+	<td class="summary">Configure a coverage criteria to a framework instance.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CoverageCriteria.setRunConfig">setRunConfig</a></td>
+	<td class="summary">Configure a runtime configuration to a framework instance.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CoverageCriteria.setStartSymbol">setStartSymbol</a></td>
+	<td class="summary">Configure the start symbol to a framework instance.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#createCC">createCC</a></td>
+	<td class="summary">Create a new framework instance to be used</td>
+	</tr>
+</table>
+<h2><a href="#Local_Functions">Local Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#doThings">doThings</a></td>
+	<td class="summary">Event dispach function.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Events"></a>Events</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "initGrammar"></a>
+    <strong>initGrammar</strong>
+    </dt>
+    <dd>
+    Dispatched before the definition of the input grammar.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "finalizeGrammar"></a>
+    <strong>finalizeGrammar</strong>
+    </dt>
+    <dd>
+    Dispatched after the definition of the input grammar.
+
+
+    <ul>
+        <li><span class="parameter">metaGrammar</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "initGen"></a>
+    <strong>initGen</strong>
+    </dt>
+    <dd>
+    Dispatched before the generation execution for the input grammar.
+
+
+    <ul>
+        <li><span class="parameter">maxCycles</span>
+
+
+
+        </li>
+        <li><span class="parameter">maxTreeHeight</span>
+
+
+
+        </li>
+        <li><span class="parameter">runConfig</span>
+
+
+
+        </li>
+        <li><span class="parameter">runGrammar</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "finalizeGen"></a>
+    <strong>finalizeGen</strong>
+    </dt>
+    <dd>
+    Dispatched after the generation execution for the input grammar.
+
+
+    <ul>
+        <li><span class="parameter">rslFunc</span>
+         Function to add a element on the result set.
+        </li>
+        <li><span class="parameter">rslDebug</span>
+         Function to add information on the debug file.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "onTerminal"></a>
+    <strong>onTerminal</strong>
+    </dt>
+    <dd>
+    On the terminal definition
+
+
+    <ul>
+        <li><span class="parameter">str</span>
+         Terminal symbol
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "onSeq"></a>
+    <strong>onSeq</strong>
+    </dt>
+    <dd>
+    On sequence definition.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "onAlt"></a>
+    <strong>onAlt</strong>
+    </dt>
+    <dd>
+    On alternative definition.
+
+
+    <ul>
+        <li><span class="parameter">n</span>
+         Number of alternatives
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "onNonTerminal"></a>
+    <strong>onNonTerminal</strong>
+    </dt>
+    <dd>
+    On nonterminal definition.
+
+
+    <ul>
+        <li><span class="parameter">str</span>
+         Nonterminal symbol.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "onProductionRule"></a>
+    <strong>onProductionRule</strong>
+    </dt>
+    <dd>
+    On production rule definition.
+
+
+    <ul>
+        <li><span class="parameter">str</span>
+         Nonterminal symbol defined by the production.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "onOptional"></a>
+    <strong>onOptional</strong>
+    </dt>
+    <dd>
+    On optional definition.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "onZeroOrMore"></a>
+    <strong>onZeroOrMore</strong>
+    </dt>
+    <dd>
+    On zeroOrMore definition.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "onOneOrMore"></a>
+    <strong>onOneOrMore</strong>
+    </dt>
+    <dd>
+    On oneOrMore definition.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "onOneOrMoreSep"></a>
+    <strong>onOneOrMoreSep</strong>
+    </dt>
+    <dd>
+    On oneOrMoreSep definition.
+
+
+    <ul>
+        <li><span class="parameter">sep</span>
+         Separator
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "onIdent"></a>
+    <strong>onIdent</strong>
+    </dt>
+    <dd>
+    On identify definition.
+
+
+    <ul>
+        <li><span class="parameter">context</span>
+         Context table
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "checkSentence"></a>
+    <strong>checkSentence</strong>
+    </dt>
+    <dd>
+    Before add a sentence on the result set.
+
+
+    <ul>
+        <li><span class="parameter">str</span>
+         The sentece produced
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "checkTerminal"></a>
+    <strong>checkTerminal</strong>
+    </dt>
+    <dd>
+    Before execute the terminal operator.
+
+
+    <ul>
+        <li><span class="parameter">str</span>
+         The sentece produced
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "checkNonTerminal"></a>
+    <strong>checkNonTerminal</strong>
+    </dt>
+    <dd>
+    Before execute the nonterminal operator.
+
+
+    <ul>
+        <li><span class="parameter">NonTerminal</span>
+         The nonterminal symbol
+        </li>
+        <li><span class="parameter">f</span>
+         Is it the first in the prodution rule?
+        </li>
+        <li><span class="parameter">prodNT</span>
+         The nonterminal associated to this nonterminal expansion.
+        </li>
+        <li><span class="parameter">maxCycles</span>
+         The current height of cycles by used the algorithm.
+        </li>
+        <li><span class="parameter">maxTreeHeight</span>
+         The current height of derivation tree used by the algorithm.
+        </li>
+        <li><span class="parameter">lookaheadSymbol</span>
+         The first symbol associated to this nonterminal expansion. The <code>MetaInfo.cOper</code> define the value set.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "checkSeq"></a>
+    <strong>checkSeq</strong>
+    </dt>
+    <dd>
+    Before execute the sequence operator.
+
+
+    <ul>
+        <li><span class="parameter">f</span>
+         Is it the first in the prodution rule?
+        </li>
+        <li><span class="parameter">prodNT</span>
+         The nonterminal associated to this nonterminal expansion.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "checkAlt"></a>
+    <strong>checkAlt</strong>
+    </dt>
+    <dd>
+    Before execute the alternative operator.
+
+
+    <ul>
+        <li><span class="parameter">f</span>
+         Is it the first in the prodution rule?
+        </li>
+        <li><span class="parameter">prodNT</span>
+         The nonterminal associated to this nonterminal expansion.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "checkZeroOrMore"></a>
+    <strong>checkZeroOrMore</strong>
+    </dt>
+    <dd>
+    Before execute the ZeroOrMore operator.
+
+
+    <ul>
+        <li><span class="parameter">f</span>
+         Is it the first in the prodution rule?
+        </li>
+        <li><span class="parameter">recNum</span>
+         The limit of repetition define for this instance
+        </li>
+        <li><span class="parameter">prodNT</span>
+         The nonterminal associated to this nonterminal expansion.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "checkOneOrMore"></a>
+    <strong>checkOneOrMore</strong>
+    </dt>
+    <dd>
+    Before execute the OneOrMore operator.
+
+
+    <ul>
+        <li><span class="parameter">f</span>
+         Is it the first in the prodution rule?
+        </li>
+        <li><span class="parameter">recNum</span>
+         The limit of repetition define for this instance
+        </li>
+        <li><span class="parameter">prodNT</span>
+         The nonterminal associated to this nonterminal expansion.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "checkOneOrMoreSep"></a>
+    <strong>checkOneOrMoreSep</strong>
+    </dt>
+    <dd>
+    Before execute the OneOrMoreSep operator.
+
+
+    <ul>
+        <li><span class="parameter">f</span>
+         Is it the first in the prodution rule?
+        </li>
+        <li><span class="parameter">termnalSep</span>
+         The separator terminal
+        </li>
+        <li><span class="parameter">recNum</span>
+         The limit of repetition define for this instance
+        </li>
+        <li><span class="parameter">prodNT</span>
+         The nonterminal associated to this nonterminal expansion.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "checkIdent"></a>
+    <strong>checkIdent</strong>
+    </dt>
+    <dd>
+    Before execute the OneOrMoreSep operator.
+
+
+    <ul>
+        <li><span class="parameter">f</span>
+         Is it the first in the prodution rule?
+        </li>
+        <li><span class="parameter">context</span>
+         Context table
+        </li>
+        <li><span class="parameter">prodNT</span>
+         The nonterminal associated to this nonterminal expansion.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "CoverageCriteria.setCoverageCriteria"></a>
+    <strong>setCoverageCriteria</strong>
+    </dt>
+    <dd>
+    Configure a coverage criteria to a framework instance.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">fcc</span>
+         Framewrok instance
+        </li>
+        <li><span class="parameter">cc</span>
+         Coverage criteria instance
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CoverageCriteria.setRunConfig"></a>
+    <strong>setRunConfig</strong>
+    </dt>
+    <dd>
+    Configure a runtime configuration to a framework instance.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">fcc</span>
+         Framewrok instance
+        </li>
+        <li><span class="parameter">rc</span>
+         Runtime config table
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CoverageCriteria.setStartSymbol"></a>
+    <strong>setStartSymbol</strong>
+    </dt>
+    <dd>
+    Configure the start symbol to a framework instance.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">fcc</span>
+         Framewrok instance
+        </li>
+        <li><span class="parameter">S</span>
+         The start symbol
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "createCC"></a>
+    <strong>createCC</strong>
+    </dt>
+    <dd>
+    Create a new framework instance to be used
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A framework instance
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Local_Functions"></a>Local Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "doThings"></a>
+    <strong>doThings</strong>
+    </dt>
+    <dd>
+    Event dispach function.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">fcc</span>
+
+
+
+        </li>
+        <li><span class="parameter">f</span>
+
+
+
+        </li>
+        <li><span class="parameter">fName</span>
+
+
+
+        </li>
+        <li><span class="parameter">inInit</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.5</a></i>
+<i style="float:right;">Last updated 2017-02-24 13:19:22 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

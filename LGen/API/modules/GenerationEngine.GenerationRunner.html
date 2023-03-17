@@ -1,0 +1,440 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>LGen Documentation</title>
+    <link rel="stylesheet" href="../ldoc_fixed.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>LGen</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+<li><a href="#Tables">Tables</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/GenerationEngine.html">GenerationEngine</a></li>
+  <li><strong>GenerationEngine.GenerationRunner</strong></li>
+  <li><a href="../modules/GenerationEngine.coverageCriteria.html">GenerationEngine.coverageCriteria</a></li>
+  <li><a href="../modules/GenerationEngine.grammar_transformation.html">GenerationEngine.grammar_transformation</a></li>
+  <li><a href="../modules/GenerationEngine.productionCoverage.html">GenerationEngine.productionCoverage</a></li>
+  <li><a href="../modules/Translator.html">Translator</a></li>
+  <li><a href="../modules/Translator.ANTLR_G.html">Translator.ANTLR_G</a></li>
+  <li><a href="../modules/Translator.EBNF_G.html">Translator.EBNF_G</a></li>
+  <li><a href="../modules/Translator.SDF_G.html">Translator.SDF_G</a></li>
+  <li><a href="../modules/Translator.printDotGDGraph.html">Translator.printDotGDGraph</a></li>
+</ul>
+<h2>Scripts</h2>
+<ul class="nowrap">
+  <li><a href="../scripts/RunGrammar.html">RunGrammar</a></li>
+  <li><a href="../scripts/buildProdGraph.html">buildProdGraph</a></li>
+  <li><a href="../scripts/grammarTrans.html">grammarTrans</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>GenerationEngine.GenerationRunner</code></h1>
+<p>Module to run the generation engine as an API.</p>
+<p>
+
+</p>
+    <h3>Info:</h3>
+    <ul>
+        <li><strong>Author</strong>: Cleverton Hentz</p>
+
+<p> Dependencies: <code>Util</code>, <code>grammar_engine</code>, <code>grammar_engine_EBNF</code>, <a href="../modules/GenerationEngine.grammar_transformation.html">grammar_transformation</a></li>
+    </ul>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#GenRunner.outPrintConsole">outPrintConsole</a></td>
+	<td class="summary">send the output to the console.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GenRunner.outSendNull">outSendNull</a></td>
+	<td class="summary">discard the output.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GenRunner.outLimitNumber">outLimitNumber</a></td>
+	<td class="summary">output limited function.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GenRunner.outTable">outTable</a></td>
+	<td class="summary">output in a table.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GenRunner.new">new</a></td>
+	<td class="summary">create a new GenerationRunner object from def.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GenRunner.newConfFile">newConfFile</a></td>
+	<td class="summary">create a new GenerationRunner object from a config file.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GenRunner.getConfig">getConfig</a></td>
+	<td class="summary">return a copy of the current configuration.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GenRunner.setConfig">setConfig</a></td>
+	<td class="summary">change the current configuration.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GenRunner.runGFile">runGFile</a></td>
+	<td class="summary">run the generation engine based on a grammar file.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GenRunner.runGrammar">runGrammar</a></td>
+	<td class="summary">execute the GenerationRunner object.</td>
+	</tr>
+</table>
+<h2><a href="#Tables">Tables</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#DefOptionsTab">DefOptionsTab</a></td>
+	<td class="summary">Default table for runtime configuration.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "GenRunner.outPrintConsole"></a>
+    <strong>outPrintConsole</strong>
+    </dt>
+    <dd>
+    send the output to the console.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">sent</span>
+
+
+
+        </li>
+        <li><span class="parameter">index</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GenRunner.outSendNull"></a>
+    <strong>outSendNull</strong>
+    </dt>
+    <dd>
+    discard the output.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">info</span>
+
+
+
+        </li>
+        <li><span class="parameter">index</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GenRunner.outLimitNumber"></a>
+    <strong>outLimitNumber</strong>
+    </dt>
+    <dd>
+    output limited function.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">lNumber</span>
+
+
+
+        </li>
+        <li><span class="parameter">fOut</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GenRunner.outTable"></a>
+    <strong>outTable</strong>
+    </dt>
+    <dd>
+    output in a table.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GenRunner.new"></a>
+    <strong>new</strong>
+    </dt>
+    <dd>
+    create a new GenerationRunner object from def.  values
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">initConfig</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GenRunner.newConfFile"></a>
+    <strong>newConfFile</strong>
+    </dt>
+    <dd>
+    create a new GenerationRunner object from a config file.
+ It create a new GenerationRunner object based on a config file.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">f</span>
+         Path to the <code>.conf</code> file.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        a new GenerationRunner
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GenRunner.getConfig"></a>
+    <strong>getConfig</strong>
+    </dt>
+    <dd>
+    return a copy of the current configuration.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">gr</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GenRunner.setConfig"></a>
+    <strong>setConfig</strong>
+    </dt>
+    <dd>
+    change the current configuration.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">gr</span>
+         The GenRunner object
+        </li>
+        <li><span class="parameter">newConfig</span>
+         A table with the new config. See <a href="../modules/GenerationEngine.GenerationRunner.html#DefOptionsTab">DefOptionsTab</a> to all options.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GenRunner.runGFile"></a>
+    <strong>runGFile</strong>
+    </dt>
+    <dd>
+    run the generation engine based on a grammar file.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">gr</span>
+
+
+
+        </li>
+        <li><span class="parameter">gFile</span>
+        print("GenRunner.runGFile")
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GenRunner.runGrammar"></a>
+    <strong>runGrammar</strong>
+    </dt>
+    <dd>
+    execute the GenerationRunner object.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">gr</span>
+         GenerationRunner object.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Tables"></a>Tables</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "DefOptionsTab"></a>
+    <strong>DefOptionsTab</strong>
+    </dt>
+    <dd>
+    Default table for runtime configuration.
+ Can be used on the configuration files.
+
+
+    <h3>Fields:</h3>
+    <ul>
+        <li><span class="parameter">quietExec</span>
+        Quiet execution
+        </li>
+        <li><span class="parameter">maxCyclesOp</span>
+        Max. cycles inside an operator. Like, <code>oneOrMore</code> operator.
+        </li>
+        <li><span class="parameter">maxCycles</span>
+        Global max. nonterminal cycles
+        </li>
+        <li><span class="parameter">maxDerivLen</span>
+        Max. derivation tree height
+        </li>
+        <li><span class="parameter">maxDerivLenFinal</span>
+        Max. derivarion tree height final. Only for <code>stats</code>
+        </li>
+        <li><span class="parameter">coverageCrit</span>
+        Coverage criterion to use
+        </li>
+        <li><span class="parameter">filePrefix</span>
+        Prefix for the output files
+        </li>
+        <li><span class="parameter">FuncResult</span>
+        Default function to handle the result sentences
+        </li>
+        <li><span class="parameter">FuncMeta</span>
+        Default function to handle the meta-information about the sentences
+        </li>
+        <li><span class="parameter">transGrammarCache</span>
+        Use a cache file save the transformation grammar
+        </li>
+        <li><span class="parameter">grammarTrans</span>
+        Use the grammar transformation chain
+        </li>
+        <li><span class="parameter">useRandomAlts</span>
+        Use the pseudo-random algorithm to sort the alts instructions
+        </li>
+        <li><span class="parameter">altStartSymbol</span>
+        Use an alternative start symbol to the generation process
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.5</a></i>
+<i style="float:right;">Last updated 2017-02-24 13:19:22 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

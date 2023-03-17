@@ -1,0 +1,664 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>LGen Documentation</title>
+    <link rel="stylesheet" href="../ldoc_fixed.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>LGen</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Events">Events</a></li>
+<li><a href="#Fields">Fields</a></li>
+<li><a href="#Local_Functions">Local Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/GenerationEngine.html">GenerationEngine</a></li>
+  <li><a href="../modules/GenerationEngine.GenerationRunner.html">GenerationEngine.GenerationRunner</a></li>
+  <li><a href="../modules/GenerationEngine.coverageCriteria.html">GenerationEngine.coverageCriteria</a></li>
+  <li><a href="../modules/GenerationEngine.grammar_transformation.html">GenerationEngine.grammar_transformation</a></li>
+  <li><strong>GenerationEngine.productionCoverage</strong></li>
+  <li><a href="../modules/Translator.html">Translator</a></li>
+  <li><a href="../modules/Translator.ANTLR_G.html">Translator.ANTLR_G</a></li>
+  <li><a href="../modules/Translator.EBNF_G.html">Translator.EBNF_G</a></li>
+  <li><a href="../modules/Translator.SDF_G.html">Translator.SDF_G</a></li>
+  <li><a href="../modules/Translator.printDotGDGraph.html">Translator.printDotGDGraph</a></li>
+</ul>
+<h2>Scripts</h2>
+<ul class="nowrap">
+  <li><a href="../scripts/RunGrammar.html">RunGrammar</a></li>
+  <li><a href="../scripts/buildProdGraph.html">buildProdGraph</a></li>
+  <li><a href="../scripts/grammarTrans.html">grammarTrans</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>GenerationEngine.productionCoverage</code></h1>
+<p>Production coverage implementation.</p>
+<p>The module implements the production coverage criterion. The main idea to the algorithm is
+create a set of test requiremets, the <a href="../modules/GenerationEngine.productionCoverage.html#goalSymbols">goalSymbols</a>, and for each requirement that will be
+satisfied by the process it is removed from the intial set. At the end of the process we
+check the number of inital requirements over the final ones and calculate the coverage rate.</p>
+
+<p>The main process has the following steps:</p>
+
+<ol>
+    <li>The basic structures are computed on the event <a href="../modules/GenerationEngine.productionCoverage.html#initGen">initGen</a>. These structures are:
+    <a href="../modules/GenerationEngine.productionCoverage.html#productions">productions</a> and <a href="../modules/GenerationEngine.productionCoverage.html#PRules">PRules</a>. Currently, the <a href="../modules/GenerationEngine.productionCoverage.html#goalSymbols">goalSymbols</a> is defined with all production
+    rules, but it is also possible to define another intial set.</li>
+    <li>The events <a href="../modules/GenerationEngine.productionCoverage.html#checkNonTerminal">checkNonTerminal</a> and <a href="../modules/GenerationEngine.productionCoverage.html#checkAlt">checkAlt</a> are used to control the <a href="../modules/GenerationEngine.productionCoverage.html#penSymbols">penSymbols</a> set.
+    These are also responsible to the optimization over the nonterminal and prodution rules
+    expansion to restrict the execution of the algorithm over search spaces that don't contribute
+    to the coverage criterion coverage.</li>
+    <li>At the end of sentence generation, the <a href="../modules/GenerationEngine.productionCoverage.html#checkSentence">checkSentence</a> event is used to a final check over
+    the sentence to see if it will be used or discarted.</li>
+    <li>At the end of the process, the event <a href="../modules/GenerationEngine.productionCoverage.html#finalizeGen">finalizeGen</a> is used to calculate the information about the
+    achievement of the coverage criterion.</li>
+</ol>
+
+<p>Dependencies: <code>Util</code>, <code>TimeMachine</code>, <code>BenchTimer</code>, <code>Set</code>, <code>Relation</code>, <code>MetaInfo</code></p>
+    <h3>Info:</h3>
+    <ul>
+        <li><strong>Author</strong>: Cleverton Hentz</li>
+    </ul>
+
+
+<h2><a href="#Events">Events</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#finalizeGrammar">finalizeGrammar</a></td>
+	<td class="summary">It happens after the reading of original grammar.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#initGen">initGen</a></td>
+	<td class="summary">It happens before the generation process.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#finalizeGen">finalizeGen</a></td>
+	<td class="summary">Collect the information about the results</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#checkNonTerminal">checkNonTerminal</a></td>
+	<td class="summary">Verify if the nonterminal contribute with a requirement.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#checkSentence">checkSentence</a></td>
+	<td class="summary">Verify if the sentence contribute with a requirement.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#checkAlt">checkAlt</a></td>
+	<td class="summary">Verify if the alternative contribute with a requirement.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#checkOneOrMoreSep">checkOneOrMoreSep</a></td>
+	<td class="summary">Verify if the operator oneOrMoreSep contribute with a requirement.</td>
+	</tr>
+</table>
+<h2><a href="#Fields">Fields</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#productions">productions</a></td>
+	<td class="summary">The table with all productions rules from the input grammar.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#PRules">PRules</a></td>
+	<td class="summary">Table with the productions closure used by the algorithm.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#mGrammar">mGrammar</a></td>
+	<td class="summary">A simplification of the input grammar used to calculate other structures.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#goalSymbols">goalSymbols</a></td>
+	<td class="summary">The set thats represents the test requirement set.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#penSymbols">penSymbols</a></td>
+	<td class="summary">The set of production rules used by the derivation processe for the current sentence.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#prodConfig">prodConfig</a></td>
+	<td class="summary">The configuration of the production coverage criterion</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#reachablePRCount">reachablePRCount</a></td>
+	<td class="summary">Number of reachable production rules from the start symbol.</td>
+	</tr>
+</table>
+<h2><a href="#Local_Functions">Local Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#constructAllProductions">constructAllProductions</a></td>
+	<td class="summary"><strong><em>Deprecated</em></strong>, Construct the production information to the algorithm.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#calcPRules">calcPRules</a></td>
+	<td class="summary"><strong><em>Deprecated</em></strong>, Construct the transitive and reflexive closure from production rules.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#checkNeedContinue">checkNeedContinue</a></td>
+	<td class="summary">Check if the algorithm should continue.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#checkGrammar">checkGrammar</a></td>
+	<td class="summary">Check if there are some grammar inconsistency</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#convertProdSet">convertProdSet</a></td>
+	<td class="summary">Convert internal representation of production from Array to Set.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#calcReachablePR">calcReachablePR</a></td>
+	<td class="summary">calculate the reachable production rules from the start symbol</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#genMetaGrammar">genMetaGrammar</a></td>
+	<td class="summary">Generate information from the actual grammar to the algorithm.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Events"></a>Events</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "finalizeGrammar"></a>
+    <strong>finalizeGrammar</strong>
+    </dt>
+    <dd>
+    It happens after the reading of original grammar.
+
+
+    <ul>
+        <li><span class="parameter">MG</span>
+         A meta-grammar
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/GenerationEngine.coverageCriteria.html#finalizeGrammar">GenerationEngine.coverageCriteria.finalizeGrammar</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "initGen"></a>
+    <strong>initGen</strong>
+    </dt>
+    <dd>
+
+<p>It happens before the generation process.
+On this function are created the basic structures to the algorithm:</p>
+
+<ul>
+    <li><a href="../modules/GenerationEngine.productionCoverage.html#productions">productions</a> table is used to store the productions rules for the grammar;</li>
+    <li><a href="../modules/GenerationEngine.productionCoverage.html#PRules">PRules</a> table is used to store the production closure;</li>
+    <li><a href="../modules/GenerationEngine.productionCoverage.html#goalSymbols">goalSymbols</a> set is used to define the productions' set used as goal to the algorithm.</li>
+</ul>
+
+
+
+
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/GenerationEngine.coverageCriteria.html#initGen">GenerationEngine.coverageCriteria.initGen</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "finalizeGen"></a>
+    <strong>finalizeGen</strong>
+    </dt>
+    <dd>
+    Collect the information about the results
+
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/GenerationEngine.coverageCriteria.html#finalizeGen">GenerationEngine.coverageCriteria.finalizeGen</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "checkNonTerminal"></a>
+    <strong>checkNonTerminal</strong>
+    </dt>
+    <dd>
+    Verify if the nonterminal contribute with a requirement.
+
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/GenerationEngine.coverageCriteria.html#checkNonTerminal">GenerationEngine.coverageCriteria.checkNonTerminal</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "checkSentence"></a>
+    <strong>checkSentence</strong>
+    </dt>
+    <dd>
+    Verify if the sentence contribute with a requirement.
+ If the sentence has new requirements, its is added
+ to the result set and his requiriments are removed from
+ the <a href="../modules/GenerationEngine.productionCoverage.html#goalSymbols">goalSymbols</a> set.
+
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/GenerationEngine.coverageCriteria.html#checkSentence">GenerationEngine.coverageCriteria.checkSentence</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "checkAlt"></a>
+    <strong>checkAlt</strong>
+    </dt>
+    <dd>
+    Verify if the alternative contribute with a requirement.
+ If an alternative or production rule doesn't contribute to the
+ coverage satisfaction, it is not executed.
+
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/GenerationEngine.coverageCriteria.html#checkAlt">GenerationEngine.coverageCriteria.checkAlt</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "checkOneOrMoreSep"></a>
+    <strong>checkOneOrMoreSep</strong>
+    </dt>
+    <dd>
+    Verify if the operator oneOrMoreSep contribute with a requirement.
+
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/GenerationEngine.coverageCriteria.html#checkOneOrMoreSep">GenerationEngine.coverageCriteria.checkOneOrMoreSep</a>
+    </ul>
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Fields"></a>Fields</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "productions"></a>
+    <strong>productions</strong>
+    </dt>
+    <dd>
+    The table with all productions rules from the input grammar.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "PRules"></a>
+    <strong>PRules</strong>
+    </dt>
+    <dd>
+    Table with the productions closure used by the algorithm.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "mGrammar"></a>
+    <strong>mGrammar</strong>
+    </dt>
+    <dd>
+    A simplification of the input grammar used to calculate other structures.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "goalSymbols"></a>
+    <strong>goalSymbols</strong>
+    </dt>
+    <dd>
+    The set thats represents the test requirement set.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "penSymbols"></a>
+    <strong>penSymbols</strong>
+    </dt>
+    <dd>
+    The set of production rules used by the derivation processe for the current sentence.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "prodConfig"></a>
+    <strong>prodConfig</strong>
+    </dt>
+    <dd>
+    The configuration of the production coverage criterion
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "reachablePRCount"></a>
+    <strong>reachablePRCount</strong>
+    </dt>
+    <dd>
+    Number of reachable production rules from the start symbol.
+
+
+
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Local_Functions"></a>Local Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "constructAllProductions"></a>
+    <strong>constructAllProductions</strong>
+    </dt>
+    <dd>
+    <strong><em>Deprecated</em></strong>, Construct the production information to the algorithm.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">prods</span>
+            <span class="types"><span class="type">table</span></span>
+         Table of productions.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">table</span></span>
+        Return a table with <code>&lt;NonTerminal&gt;#&lt;Index&gt;</code> syntax.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "calcPRules"></a>
+    <strong>calcPRules</strong>
+    </dt>
+    <dd>
+    <strong><em>Deprecated</em></strong>, Construct the transitive and reflexive closure from production rules.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">prods</span>
+            <span class="types"><span class="type">table</span></span>
+         Table of productions.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">table</span></span>
+        Return a table with <code>[&lt;NonTerminal&gt;] = {&lt;NonTerminal&gt;#&lt;Index&gt;}</code> syntax.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/GenerationEngine.productionCoverage.html#constructAllProductions">constructAllProductions</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "checkNeedContinue"></a>
+    <strong>checkNeedContinue</strong>
+    </dt>
+    <dd>
+    Check if the algorithm should continue.
+ Check is based on the <a href="../modules/GenerationEngine.productionCoverage.html#PRules">PRules</a> table and <a href="../modules/GenerationEngine.productionCoverage.html#goalSymbols">goalSymbols</a> set.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">nonTerminal</span>
+            <span class="types"><span class="type">string</span></span>
+         NT to verify.
+        </li>
+        <li><span class="parameter">index</span>
+            <span class="types"><span class="type">number</span></span>
+         Production index to verify
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">{nil,number,bool}</span></span>
+        It is OK or not ot go.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "checkGrammar"></a>
+    <strong>checkGrammar</strong>
+    </dt>
+    <dd>
+    Check if there are some grammar inconsistency
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">metaGrammar</span>
+         The meta-grammar
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+        Is the grammar OK?</li>
+        <li>
+        If non OK, present a error message</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "convertProdSet"></a>
+    <strong>convertProdSet</strong>
+    </dt>
+    <dd>
+    Convert internal representation of production from Array to Set.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">prod</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "calcReachablePR"></a>
+    <strong>calcReachablePR</strong>
+    </dt>
+    <dd>
+    calculate the reachable production rules from the start symbol
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">start</span>
+
+
+
+        </li>
+        <li><span class="parameter">prodClosure</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "genMetaGrammar"></a>
+    <strong>genMetaGrammar</strong>
+    </dt>
+    <dd>
+    Generate information from the actual grammar to the algorithm.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">G</span>
+            <span class="types"><span class="type">table</span></span>
+         The grammar received after the transformation process.
+        </li>
+        <li><span class="parameter">maxTreeHeight</span>
+            <span class="types"><span class="type">number</span></span>
+         The maximum derivation tree height from runtime configuration.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">table</span></span>
+         Return a table with the fields: <br>
+ <ul>
+ <li><code>Terminals</code>: (<strong>Set</strong>)</li>
+ <li><code>NTerminals</code>: (<strong>Set</strong>)</li>
+ <li><code>startSymbol</code>: (<strong>String</strong>)</li>
+ <li><code>Productions</code>: (<strong>table</strong>)</li>
+ <li><code>ClosureProductions</code>: (<strong>table</strong>)</li>
+ </ul>
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.5</a></i>
+<i style="float:right;">Last updated 2017-02-24 13:19:22 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
