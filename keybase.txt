@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/chentz
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://chentz78.github.io
+  * I am chentz (https://keybase.io/chentz) on keybase.
+  * I have a public key ASDYxU5jP-aDjI2WRATE2uaOXUSC1KWMbC0-uSVo18yQpgo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "01010e1804c847ed8563f636a109a602cfc162f521a23dd7834c793508ea09ad47460a",
+      "host": "keybase.io",
+      "kid": "0120d8c54e633fe6838c8d964404c4dae68e5d4482d4a58c6c2d3eb92568d7cc90a60a",
+      "uid": "e7af219768cb5b184bde95a2659dff19",
+      "username": "chentz"
+    },
+    "merkle_root": {
+      "ctime": 1679064510,
+      "hash": "d354624d58663e4d54b2609b9565ed8c0225b05d8e958ba5667138524ff612bc5c6d8da122f2bc73c90c7fb7ba0890f5546c3dc43149e00a34f97a4d6c425147",
+      "hash_meta": "15d8314902a600612c782d93e26bdd3a2a19e51b86c36cd9146b37771d0b11fe",
+      "seqno": 24209812
+    },
+    "service": {
+      "entropy": "uDOhF9Omn7oUo+ynFYZX51/e",
+      "hostname": "chentz78.github.io",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "6.0.2"
+  },
+  "ctime": 1679064542,
+  "expire_in": 504576000,
+  "prev": "722947bc5e4a2cffe543c2eeabbe406d516f7490be8304cf2fab8b547b58d127",
+  "seqno": 75,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEg2MVOYz/mg4yNlkQExNrmjl1EgtSljGwtPrklaNfMkKYKp3BheWxvYWTESpcCS8QgcilHvF5KLP/lQ8Luq75AbVFvdJC+gwTPL6uLVHtY0SfEIMJqCbdLWfhkD1lv64UbiYbt74pI6wDArpQRIJyhiSC+AgHCo3NpZ8RAhjZf5mWNC+Yx1NleWOAJuIyrer0frZr3GxA2Ebw5wbdtfaLGPDWNoeRV4Hqezsc7Ljeh7TN7QLOQP6N7L23lDKhzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIHdhO3hacSkZrBaX070GqE5wuWRAJ3pj5kwlkyMyhrVOo3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/chentz
+
+==================================================================
