@@ -15,8 +15,6 @@ echo "Keybase.io: chentz" >> $fOut
 echo >> $fOut
 
 echo "e-mail: cleverton at pm dot me" >> $fOut
-echo "      : cleverton dot hentz at protonmail dot ch" >> $fOut
-echo "      : cleverton dot hentz at gmail dot com" >> $fOut
 echo >> $fOut
 
 echo "Public bitcoin: 1GULGZz1Q8yuLwmQmxGGtRCbADkaQv7pAb" >> $fOut
@@ -26,7 +24,6 @@ echo "$ date" >> $fOut
 date >> $fOut
 echo >> $fOut
 
-#key=0x4D44D767B147B5ED
 key=0x6EE40E7A050BA983
 echo "$ gpg --fingerprint $key" >> $fOut
 gpg --fingerprint $key | head -n 3 >> $fOut
